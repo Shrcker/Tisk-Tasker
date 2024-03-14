@@ -1,9 +1,4 @@
-  /* exported gapiLoaded */
-  /* exported gisLoaded */
-  /* exported handleAuthClick */
-  /* exported handleSignoutClick */
 
-  // TODO(developer): Set to client ID and API key from the Developer Console
   const CLIENT_ID = '<YOUR_CLIENT_ID>';
   const API_KEY = '<YOUR_API_KEY>';
 
@@ -21,17 +16,10 @@
   document.getElementById('authorize_button').style.visibility = 'hidden';
   document.getElementById('signout_button').style.visibility = 'hidden';
 
-  /**
-   * Callback after api.js is loaded.
-   */
   function gapiLoaded() {
     gapi.load('client', initializeGapiClient);
   }
 
-  /**
-   * Callback after the API client is loaded. Loads the
-   * discovery doc to initialize the API.
-   */
   async function initializeGapiClient() {
     await gapi.client.init({
       apiKey: API_KEY,
@@ -41,9 +29,6 @@
     maybeEnableButtons();
   }
 
-  /**
-   * Callback after Google Identity Services are loaded.
-   */
   function gisLoaded() {
     tokenClient = google.accounts.oauth2.initTokenClient({
       client_id: CLIENT_ID,
@@ -62,20 +47,6 @@
       document.getElementById('authorize_button').style.visibility = 'visible';
     }
   }
-
-  /**
-   *  Sign in the user upon button click.
-   */
-  function handleAuthClick() {
-    tokenClient.callback = async (resp) => {
-      if (resp.error !== undefined) {
-        throw (resp);
-      }
-      document.getElementById('signout_button').style.visibility = 'visible';
-      document.getElementById('authorize_button').innerText = 'Refresh';
-      await listUpcomingEvents();
-    };
-
     if (gapi.client.getToken() === null) {
       // Prompt the user to select a Google Account and ask for consent to share their data
       // when establishing a new session.
@@ -84,28 +55,7 @@
       // Skip display of account chooser and consent dialog for an existing session.
       tokenClient.requestAccessToken({prompt: ''});
     }
-  }
-
-  /**
-   *  Sign out the user upon button click.
-   */
-  function handleSignoutClick() {
-    const token = gapi.client.getToken();
-    if (token !== null) {
-      google.accounts.oauth2.revoke(token.access_token);
-      gapi.client.setToken('');
-      document.getElementById('content').innerText = '';
-      document.getElementById('authorize_button').innerText = 'Authorize';
-      document.getElementById('signout_button').style.visibility = 'hidden';
-    }
-  }
-
-  /**
-   * Print the summary and start datetime/date of the next ten events in
-   * the authorized user's calendar. If no events are found an
-   * appropriate message is printed.
-   */
-  async function listUpcomingEvents() {
+    async function listUpcomingEvents() {
     let response;
     try {
       const request = {
