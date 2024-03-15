@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 /* Resetting default browser styles */
 body {
   margin: 0;
@@ -12,7 +10,9 @@ body {
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #100646;
+
+  background-color: #f9f9f9;
+
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -129,4 +129,3 @@ body {
 .form-button:hover {
   background-color: #0056b3;
 }
->>>>>>> Stashed changes
