@@ -1,5 +1,5 @@
 /* Resetting default browser styles */
-html, body {
+body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
@@ -10,7 +10,9 @@ html, body {
   max-width: 800px;
   margin: 20px auto;
   padding: 20px;
+
   background-color: #f9f9f9;
+
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
