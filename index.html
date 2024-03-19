@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Our Web Page Name</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./assets/css/styles.css" />
   </head>
   <body>
     <header></header>
@@ -31,6 +31,29 @@
       <!--Add calendar here -->
     </div>
 
+<!-- Planner Modal -->
+    <div class="planner">
+    <!-- Planner content goes here -->
+    <button id="openModalBtn">Add Event</button>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Add Event</h2>
+            <form id="eventForm">
+                <label for="eventName">Event Name:</label>
+                <input type="text" id="eventName" name="eventName" required>
+                <label for="eventDate">Event Date:</label>
+                <input type="date" id="eventDate" name="eventDate" required>
+                <label for="eventTime">Event Time:</label>
+                <input type="time" id="eventTime" name="eventTime" required>
+                <button type="submit">Add</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="./assets/javascript/modal.js"></script>
     <script src="./assets/javascript/script.js"></script>
   </body>
 </html>

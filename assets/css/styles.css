@@ -3,6 +3,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
+  background-color: rgb(57, 60, 97);
+  color:#f5eded
 }
 
 /* Container styles */
@@ -17,39 +19,13 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Calendar styles */
-.calendar {
-  text-align: center;
-}
 
-.calendar-header {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
 
-.calendar-header h2 {
-  margin: 0;
-  font-size: 1.5em;
-}
 
-.calendar-days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  text-align: center;
-  margin-top: 10px;
-}
 
-.calendar-day {
-  padding: 10px;
-  border: 1px solid #ccc;
-}
 
-.current-month {
-  font-weight: bold;
-}
+
+
 
 /* Reminder styles */
 .reminders {
@@ -128,4 +104,45 @@ body {
 
 .form-button:hover {
   background-color: #0056b3;
+}
+/* CSS for event modal */
+/* Planner styles */
+.planner {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
