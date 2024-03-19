@@ -107,14 +107,9 @@ prenexIcons.forEach((icon) => {
 });
 
 const selectDay = (e) => {
-  const listArray = querySelectorAll("li");
-  const findActive = listArray.findIndex(
-    (target) => target.classList === "active"
-  );
-  if (findActive) {
-    target.classList.toggle("active");
-  }
   e.stopPropagation();
+  dayArray = document.querySelectorAll("li");
+  dayArray.forEach((selected) => selected.classList.remove("active"));
   e.target.classList.toggle("active");
 };
 
