@@ -129,12 +129,13 @@ body {
   background-color: #fefefe;
   margin: 10% auto;
   padding: 20px;
-  border: 1px solid #888;
+  border: 5px solid #6c6b6b;
+  color:#464444;
   width: 80%;
 }
 
 .close {
-  color: #aaa;
+  color: #464444;
   float: right;
   font-size: 28px;
   font-weight: bold;
