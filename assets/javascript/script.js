@@ -4,6 +4,7 @@ const dayInput = document.getElementById("day-input");
 const submitButton = document.getElementById("submit-button");
 const titleText = document.getElementById("title-text");
 const descText = document.getElementById("desc-text");
+const calendarBody = document.getElementById("calendar-body");
 const saveData = JSON.parse(localStorage.getItem("saves")) ?? [];
 let date = new Date();
 let year = date.getFullYear();
@@ -24,8 +25,6 @@ const saveDate = (e) => {
   saveData.push(data);
   localStorage.setItem("saves", saveData);
 };
-
-submitButton.addEventListener("click", saveDate);
 
 // Array of month names
 const months = [
@@ -52,7 +51,6 @@ const manipulate = () => {
   let dayend = new Date(year, month, lastdate).getDay();
   // Get the last date of the previous month
   let monthlastdate = new Date(year, month, 0).getDate();
-  console.log(monthlastdate);
   // Variable to store the generated calendar HTML
   let lit = "";
   // Loop to add the last dates of the previous month
@@ -107,3 +105,11 @@ prenexIcons.forEach((icon) => {
     manipulate();
   });
 });
+
+const selectDay = (e) => {
+  e.stopPropagation();
+  e.target.classList.toggle("active");
+};
+
+day.addEventListener("click", selectDay);
+submitButton.addEventListener("click", saveDate);
