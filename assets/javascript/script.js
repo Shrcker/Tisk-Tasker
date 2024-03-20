@@ -119,12 +119,13 @@ const selectDay = (e) => {
   dayArray.forEach((selected) => selected.classList.remove("active"));
   e.target.classList.toggle("active");
 
-  const targetDay = e.target.getAttribute("data-day"); // Selector to get the day of the month that the selected day is.
-  const userDay = saveData.find(
+  let targetDay = e.target.getAttribute("data-day"); // Selector to get the day of the month that the selected day is.
+  let userDay = saveData.find(
     (event) => event.date.split("-")[2] === targetDay
   ); // Finds and returns the object that matches the currently selected day.
   if (userDay) {
     console.log("success");
+    console.log(userDay.description);
   }
 };
 
