@@ -1,6 +1,6 @@
 const taskText = document.getElementById("task-text");
 const monthInput = document.getElementById("month-input");
-const dayInput = document.getElementById("day-input");
+const dayInput = document.getElementById("day-picker");
 const submitButton = document.getElementById("submit-button");
 const titleText = document.getElementById("title-text");
 const descText = document.getElementById("desc-text");
@@ -13,18 +13,21 @@ const day = document.querySelector(".calendar-dates");
 const currdate = document.querySelector(".calendar-current-date");
 const prenexIcons = document.querySelectorAll(".calendar-navigation span");
 
-const userData = {
-  title: titleText.value,
-  description: descText.value,
-  date: date,
-};
-
 const saveDate = (e) => {
   e.preventDefault();
-  const data = JSON.stringify({ ...userData });
+
+  const userData = {
+    title: titleText.value,
+    description: descText.value,
+    date: dayInput.value,
+  };
+
+  const data = { ...userData };
   saveData.push(data);
-  localStorage.setItem("saves", saveData);
+  localStorage.setItem("saves", JSON.stringify(saveData));
 };
+
+const updateCalendar = () => {};
 
 // Array of month names
 const months = [
@@ -55,7 +58,9 @@ const manipulate = () => {
   let lit = "";
   // Loop to add the last dates of the previous month
   for (let i = dayone; i > 0; i--) {
-    lit += `<li class="inactive">${monthlastdate - i + 1}</li>`;
+    lit += `<li class="inactive" data-day-before="${JSON.stringify(
+      monthlastdate - i + 1
+    )}">${monthlastdate - i + 1}</li>`;
   }
   // Loop to add the dates of the current month
   for (let i = 1; i <= lastdate; i++) {
@@ -66,11 +71,13 @@ const manipulate = () => {
       year === new Date().getFullYear()
         ? "active"
         : "";
-    lit += `<li class="${isToday}">${i}</li>`;
+    lit += `<li class="${isToday}" data-day="${JSON.stringify(i)}">${i}</li>`;
   }
   // Loop to add the first dates of the next month
   for (let i = dayend; i < 6; i++) {
-    lit += `<li class="inactive">${i - dayend + 1}</li>`;
+    lit += `<li class="inactive" data-day-after="${JSON.stringify(
+      i - dayend + 1
+    )}">${i - dayend + 1}</li>`;
   }
   // Update the text of the current date element
   // with the formatted current month and year
@@ -111,6 +118,14 @@ const selectDay = (e) => {
   dayArray = document.querySelectorAll("li");
   dayArray.forEach((selected) => selected.classList.remove("active"));
   e.target.classList.toggle("active");
+
+  const targetDay = e.target.getAttribute("data-day"); // Selector to get the day of the month that the selected day is.
+  const userDay = saveData.find(
+    (event) => event.date.split("-")[2] === targetDay
+  ); // Finds and returns the object that matches the currently selected day.
+  if (userDay) {
+    console.log("success");
+  }
 };
 
 day.addEventListener("click", selectDay);
