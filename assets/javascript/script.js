@@ -1,131 +1,88 @@
-
-  const CLIENT_ID = '<YOUR_CLIENT_ID>';
-  const API_KEY = '<YOUR_API_KEY>';
-
-  // Discovery doc URL for APIs used by the quickstart
-  const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest';
-
-  // Authorization scopes required by the API; multiple scopes can be
-  // included, separated by spaces.
-  const SCOPES = 'https://www.googleapis.com/auth/calendar';
-
-  let tokenClient;
-  let gapiInited = false;
-  let gisInited = false;
-
-  document.getElementById('authorize_button').style.visibility = 'hidden';
-  document.getElementById('signout_button').style.visibility = 'hidden';
-
-  function gapiLoaded() {
-    gapi.load('client', initializeGapiClient);
-  }
-
-  async function initializeGapiClient() {
-    await gapi.client.init({
-      apiKey: API_KEY,
-      discoveryDocs: [DISCOVERY_DOC],
-    });
-    gapiInited = true;
-    maybeEnableButtons();
-  }
-
-  function gisLoaded() {
-    tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id: CLIENT_ID,
-      scope: SCOPES,
-      callback: '', // defined later
-    });
-    gisInited = true;
-    maybeEnableButtons();
-  }
-
-  /**
-   * Enables user interaction after all libraries are loaded.
-   */
-  function maybeEnableButtons() {
-    if (gapiInited && gisInited) {
-      document.getElementById('authorize_button').style.visibility = 'visible';
-    }
-  }
-    if (gapi.client.getToken() === null) {
-      // Prompt the user to select a Google Account and ask for consent to share their data
-      // when establishing a new session.
-      tokenClient.requestAccessToken({prompt: 'consent'});
-    } else {
-      // Skip display of account chooser and consent dialog for an existing session.
-      tokenClient.requestAccessToken({prompt: ''});
-    }
-    async function listUpcomingEvents() {
-    let response;
-    try {
-      const request = {
-        'calendarId': 'primary',
-        'timeMin': (new Date()).toISOString(),
-        'showDeleted': false,
-        'singleEvents': true,
-        'maxResults': 10,
-        'orderBy': 'startTime',
-      };
-      response = await gapi.client.calendar.events.list(request);
-    } catch (err) {
-      document.getElementById('content').innerText = err.message;
-      return;
-    }
-
-    const events = response.result.items;
-    if (!events || events.length == 0) {
-      document.getElementById('content').innerText = 'No events found.';
-      return;
-    }
-    // Flatten to string to display
-    const output = events.reduce(
-        (str, event) => `${str}${event.summary} (${event.start.dateTime || event.start.date})\n`,
-        'Events:\n');
-    document.getElementById('content').innerText = output;
-  }
-  const addEvent = () => {
-    const title = document.getElementById("title").value;
-    const desc = document.getElementById("desc").value;
-    const date = document.getElementById("date").value;
-    const start = document.getElementById("st").value;
-    const end = document.getElementById("et").value;
-  
-    const startTime = new Date(date + "," + start).toISOString();
-    const endTime = new Date(date + "," + end).toISOString();
-  
-    var event = {
-      summary: title,
-      location: "Google Meet",
-      description: desc,
-      start: {
-        dateTime: startTime,
-        timeZone: "America/Los_Angeles"
-      },
-      end: {
-        dateTime: endTime,
-        timeZone: "America/Los_Angeles"
-      },
-      recurrence: ["RRULE:FREQ=DAILY;COUNT=2"],
-      attendees: [
-        { email: "abc@google.com" },
-        { email: "xyz@google.com" }
-      ],
-      reminders: {
-        useDefault: false,
-        overrides: [
-          { method: "email", minutes: 24 * 60 },
-          { method: "popup", minutes: 10 }
-        ]
-      }
-    };
-  
-    console.log(event)
-    var request = gapi.client.calendar.events.insert({
-      calendarId: "primary",
-      resource: event
-    });
-  
-    request.execute(function(event) {
-      console.log(event.htmlLink);
-    });
-  };
+let date = new Date();
+let year = date.getFullYear();
+let month = date.getMonth();
+const day = document.querySelector(".calendar-dates");
+const currdate = document
+	.querySelector(".calendar-current-date");
+const prenexIcons = document
+	.querySelectorAll(".calendar-navigation span");
+// Array of month names
+const months = [
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December"
+];
+// Function to generate the calendar
+const manipulate = () => {
+	// Get the first day of the month
+	let dayone = new Date(year, month, 1).getDay();
+	// Get the last date of the month
+	let lastdate = new Date(year, month + 1, 0).getDate();
+	// Get the day of the last date of the month
+	let dayend = new Date(year, month, lastdate).getDay();
+	// Get the last date of the previous month
+	let monthlastdate = new Date(year, month, 0).getDate();
+	// Variable to store the generated calendar HTML
+	let lit = "";
+	// Loop to add the last dates of the previous month
+	for (let i = dayone; i > 0; i--) {
+		lit +=
+			`<li class="inactive">${monthlastdate - i + 1}</li>`;
+	}
+	// Loop to add the dates of the current month
+	for (let i = 1; i <= lastdate; i++) {
+		// Check if the current date is today
+		let isToday = i === date.getDate()
+			&& month === new Date().getMonth()
+			&& year === new Date().getFullYear()
+			? "active"
+			: "";
+		lit += `<li class="${isToday}">${i}</li>`;
+	}
+	// Loop to add the first dates of the next month
+	for (let i = dayend; i < 6; i++) {
+		lit += `<li class="inactive">${i - dayend + 1}</li>`
+	}
+	// Update the text of the current date element
+	// with the formatted current month and year
+	currdate.innerText = `${months[month]} ${year}`;
+	// update the HTML of the dates element
+	// with the generated calendar
+	day.innerHTML = lit;
+}
+manipulate();
+// Attach a click event listener to each icon
+prenexIcons.forEach(icon => {
+	// When an icon is clicked
+	icon.addEventListener("click", () => {
+		// Check if the icon is "calendar-prev"
+		// or "calendar-next"
+		month = icon.id === "calendar-prev" ? month - 1 : month + 1;
+		// Check if the month is out of range
+		if (month < 0 || month > 11) {
+			// Set the date to the first day of the
+			// month with the new year
+			date = new Date(year, month, new Date().getDate());
+			// Set the year to the new year
+			year = date.getFullYear();
+			// Set the month to the new month
+			month = date.getMonth();
+		}
+		else {
+			// Set the date to the current date
+			date = new Date();
+		}
+		// Call the manipulate function to
+		// update the calendar display
+		manipulate();
+	});
+});
