@@ -25,9 +25,21 @@ const saveDate = (e) => {
   const data = { ...userData };
   saveData.push(data);
   localStorage.setItem("saves", JSON.stringify(saveData));
+  updateCalendar();
 };
 
-const updateCalendar = () => {};
+const updateCalendar = () => {
+  let dayList = document.querySelectorAll("li");
+  let dayArray = Array.from(dayList); // Converts NodeList into an array.
+  dayArray.splice(0, 7); // Cuts the weekday list items from this array.
+  console.log(dayArray);
+  saveData.forEach((event) => {
+    const foundDayEl = dayArray.find(
+      (day) => day.textContent === event.date.split("-")[2]
+    );
+    foundDayEl.classList.toggle("event-day");
+  });
+};
 
 // Array of month names
 const months = [
@@ -58,9 +70,7 @@ const manipulate = () => {
   let lit = "";
   // Loop to add the last dates of the previous month
   for (let i = dayone; i > 0; i--) {
-    lit += `<li class="inactive" data-day-before="${JSON.stringify(
-      monthlastdate - i + 1
-    )}">${monthlastdate - i + 1}</li>`;
+    lit += `<li class="inactive">${monthlastdate - i + 1}</li>`;
   }
   // Loop to add the dates of the current month
   for (let i = 1; i <= lastdate; i++) {
@@ -71,13 +81,11 @@ const manipulate = () => {
       year === new Date().getFullYear()
         ? "active"
         : "";
-    lit += `<li class="${isToday}" data-day="${JSON.stringify(i)}">${i}</li>`;
+    lit += `<li class="${isToday}">${i}</li>`;
   }
   // Loop to add the first dates of the next month
   for (let i = dayend; i < 6; i++) {
-    lit += `<li class="inactive" data-day-after="${JSON.stringify(
-      i - dayend + 1
-    )}">${i - dayend + 1}</li>`;
+    lit += `<li class="inactive"}>${i - dayend + 1}</li>`;
   }
   // Update the text of the current date element
   // with the formatted current month and year
@@ -87,6 +95,7 @@ const manipulate = () => {
   day.innerHTML = lit;
 };
 manipulate();
+updateCalendar();
 // Attach a click event listener to each icon
 prenexIcons.forEach((icon) => {
   // When an icon is clicked
@@ -119,7 +128,7 @@ const selectDay = (e) => {
   dayArray.forEach((selected) => selected.classList.remove("active"));
   e.target.classList.toggle("active");
 
-  let targetDay = e.target.getAttribute("data-day"); // Selector to get the day of the month that the selected day is.
+  let targetDay = e.target.innerHTML; // Selector to get the day of the month that the selected day is.
   let userDay = saveData.find(
     (event) => event.date.split("-")[2] === targetDay
   ); // Finds and returns the object that matches the currently selected day.
