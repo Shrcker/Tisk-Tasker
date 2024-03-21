@@ -37,7 +37,9 @@ const updateCalendar = () => {
     const foundDayEl = dayArray.find(
       (day) => day.textContent === event.date.split("-")[2]
     );
-    foundDayEl.classList.toggle("event-day");
+    if (foundDayEl) {
+      foundDayEl.classList.toggle("event-day");
+    }
   });
 };
 
