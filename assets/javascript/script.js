@@ -35,8 +35,10 @@ const updateCalendar = () => {
   console.log(dayArray);
   saveData.forEach((event) => {
     const foundDayEl = dayArray.find(
-      (day) => day.textContent === event.date.split("-")[2]
+      (day) =>
+        day.textContent === JSON.stringify(parseInt(event.date.split("-")[2]))
     );
+    console.log(foundDayEl);
     if (foundDayEl) {
       foundDayEl.classList.toggle("event-day");
     }
@@ -132,7 +134,7 @@ const selectDay = (e) => {
 
   let targetDay = e.target.innerHTML; // Selector to get the day of the month that the selected day is.
   let userDay = saveData.find(
-    (event) => event.date.split("-")[2] === targetDay
+    (event) => JSON.stringify(parseInt(event.date.split("-")[2])) === targetDay
   ); // Finds and returns the object that matches the currently selected day.
   if (userDay) {
     console.log("success");
