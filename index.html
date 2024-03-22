@@ -25,11 +25,9 @@
     <header>
       <h1>Tisk-Tasker<i class="material-icons">assignment</i></h1>
     </header>
+    <aside id="details-panel"></aside>
 
     <div class="right-side">
-      <aside id="details-panel">
-        <h3 id="details-header">Here's what's going on today:</h3>
-      </aside>
       <div class="calendar-container">
         <header class="calendar-header">
           <p class="calendar-current-date"></p>
@@ -67,8 +65,8 @@
           <label for="title-text">Event Name:</label>
           <input type="text" id="title-text" name="title-text" required /><br />
 
-          <label for="desc-text" id="desc-text">Description:</label>
-          <input type="text" id="desc-text" /><br />
+          <label for="desc-text" id="desc-label">Description:</label>
+          <input type="text" id="desc-text" required /><br />
 
           <label for="day-picker">Event Date:</label>
           <input type="date" id="day-picker" name="day-picker" required /><br />

@@ -24,15 +24,17 @@ const saveDate = (e) => {
     date: dayInput.value,
     time: eventTime.value,
   };
+  // Writes up the user object to store event details
 
   const data = { ...userData };
   saveData.push(data);
   localStorage.setItem("saves", JSON.stringify(saveData));
   myModal.style.display = "none";
-  updateCalendar();
+  updateCalendar(); // Once an event is saved, highlight it on the calendar
 };
 
 const updateCalendar = () => {
+  // Highlights days that have events tied to them.
   let dayList = document.querySelectorAll("li");
   let dayArray = Array.from(dayList); // Converts NodeList into an array.
   dayArray.splice(0, 7); // Cuts the weekday list items from this array.
@@ -140,9 +142,7 @@ const selectDay = (e) => {
   ); // Finds and returns the object that matches the currently selected day.
   detailsPanel.innerHTML = "";
   if (userDay.length) {
-    // let userEvents = saveData.filter((events) => {
-    //   JSON.stringify(parseInt(events.date.split("-")[2])) === targetDay;
-    // });
+    // If there are events matching the day, write their contents to the detail panel
     for (let i = 0; i < userDay.length; i++) {
       let HTMLText = `
         <h3 id="details-header">Here's what's going on today:</h3>
