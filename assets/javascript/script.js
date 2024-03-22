@@ -138,7 +138,8 @@ const selectDay = (e) => {
   let userDay = saveData.filter(
     (event) => JSON.stringify(parseInt(event.date.split("-")[2])) === targetDay
   ); // Finds and returns the object that matches the currently selected day.
-  if (userDay) {
+  detailsPanel.innerHTML = "";
+  if (userDay.length) {
     // let userEvents = saveData.filter((events) => {
     //   JSON.stringify(parseInt(events.date.split("-")[2])) === targetDay;
     // });
