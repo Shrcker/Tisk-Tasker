@@ -22,19 +22,19 @@ This application offers a simple calendar to add events and check the date. It w
 
 ##Credits:
 
-(News API)[https://newsapi.org/?ref=apilist.fun]
+[News API](https://newsapi.org/?ref=apilist.fun)
 
-(Numbers API)[http://numbersapi.com/#42]
+[Numbers API](http://numbersapi.com/#42)
 
 ##Collaborators:
 
-(Tania)[https://github.com/Shrcker]
+[Tania](https://github.com/Shrcker)
 
-(Kailee)[https://github.com/kaileesegarra]
+[Kailee](https://github.com/kaileesegarra)
 
-(Kristina)[https://github.com/gocrushgoals]
+[Kristina](https://github.com/gocrushgoals)
 
-(Jamie)[https://github.com/JamieThompson101]
+[Jamie](https://github.com/JamieThompson101)
 
 ##Screenshot:
 
