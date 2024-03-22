@@ -485,3 +485,7 @@ header .calendar-current-date {
   text-decoration: none;
   cursor: pointer;
 }
+
+.calendar-dates li.event-day::before {
+  background: limegreen;
+}
