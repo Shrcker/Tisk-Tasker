@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Tisk-Tasker</title>
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -11,6 +12,7 @@
 
     <!-- Custom Css Source -->
     <link rel="stylesheet" type="text/css" href="./assets/css/styles.css" />
+
   </head>
   <body>
     <header>      
@@ -18,28 +20,17 @@
     </header>
 
     <div class="main-content">
-      
-      <div class= "calender-container">
 
+      <div class="left-side">
+        <h2></h2>
+        <label for="user-input">Enter Task/Event:</label>
+        <input type="text" id="title-text" /><br />
 
-      </div>
+        <label for="user-input">Description:</label>
+        <input type="text" id="desc-text" /><br />
 
-
-
-      
-      
-      
-      <!-- Replace with event modal -->
-        <!-- <div class="left-side"> -->
-          <!-- <h2></h2>
-          <label for="user-input">Enter Task/Event:</label>
-          <input type="text" id="task-text" /><br>
-
-          <label for="user-input">Description:</label>
-          <input type="text" id="desc-text" /><br>
-
-          <label for="day-picker">Select Date:</label>
-          <input id="day-picker" type="date"></input><br>
+        <label for="day-picker">Select Date:</label>
+        <input id="day-picker" type="date" /><br />
 
           <label for="submit-button"></label>
           <button type="button" id="submit-button">Save</button>
@@ -48,8 +39,27 @@
       </div>
 
     <div class="right-side">
-      <h2></h2>
-      <!--Add calendar here -->
+      <div class="calendar-container">
+        <header class="calendar-header">
+          <p class="calendar-current-date"></p>
+          <div class="calendar-navigation">
+            <span id="calendar-prev" class="material-symbols-rounded">«</span>
+            <span id="calendar-next" class="material-symbols-rounded">»</span>
+          </div>
+        </header>
+        <div class="calendar-body">
+          <ul class="calendar-weekdays">
+            <li>Sun</li>
+            <li>Mon</li>
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+          </ul>
+          <ul class="calendar-dates"></ul>
+        </div>
+      </div>
     </div>
 
     
