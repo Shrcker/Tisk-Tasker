@@ -6,6 +6,7 @@ const titleText = document.getElementById("title-text");
 const descText = document.getElementById("desc-text");
 const calendarBody = document.getElementById("calendar-body");
 const myModal = document.getElementById("myModal");
+const detailsPanel = document.getElementById("details-panel");
 const saveData = JSON.parse(localStorage.getItem("saves")) ?? [];
 let date = new Date();
 let year = date.getFullYear();
@@ -35,13 +36,11 @@ const updateCalendar = () => {
   let dayList = document.querySelectorAll("li");
   let dayArray = Array.from(dayList); // Converts NodeList into an array.
   dayArray.splice(0, 7); // Cuts the weekday list items from this array.
-  console.log(dayArray);
   saveData.forEach((event) => {
     const foundDayEl = dayArray.find(
       (day) =>
         day.textContent === JSON.stringify(parseInt(event.date.split("-")[2]))
     );
-    console.log(foundDayEl);
     if (foundDayEl) {
       foundDayEl.classList.toggle("event-day");
     }
@@ -136,12 +135,21 @@ const selectDay = (e) => {
   e.target.classList.toggle("active");
 
   let targetDay = e.target.innerHTML; // Selector to get the day of the month that the selected day is.
-  let userDay = saveData.find(
+  let userDay = saveData.filter(
     (event) => JSON.stringify(parseInt(event.date.split("-")[2])) === targetDay
   ); // Finds and returns the object that matches the currently selected day.
   if (userDay) {
-    console.log("success");
-    console.log(userDay.description);
+    // let userEvents = saveData.filter((events) => {
+    //   JSON.stringify(parseInt(events.date.split("-")[2])) === targetDay;
+    // });
+    for (let i = 0; i < userDay.length; i++) {
+      let HTMLText = `
+        <h3 id="details-header">Here's what's going on today:</h3>
+        <ul id="details-title"><strong>Event</strong>: ${userDay[i].title}</ul>
+        <ul id="details-desc"><strong>Description:</strong> ${userDay[i].description}</ul>
+        <ul id="details-time"><strong>Time:</strong> ${userDay[i].time}</ul>`;
+      detailsPanel.innerHTML += HTMLText;
+    }
   }
 };
 
