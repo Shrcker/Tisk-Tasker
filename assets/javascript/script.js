@@ -39,6 +39,7 @@ const saveDate = (e) => {
   } else {
     saveData[dataArrIndex] = userData;
   }
+
   localStorage.setItem("saves", JSON.stringify(saveData));
   updateCalendar(); // Once an event is saved, highlight it on the calendar
 };
@@ -52,9 +53,11 @@ const updateCalendar = () => {
 
   // Highlights days that have events tied to them.
   let dayList = document.querySelectorAll("li:not(.inactive)"); // function will not highlight days not of the current month
+  dayList.forEach((days) => days.classList.remove("event-day")); // re-initializes calendar
+
   let dayArray = Array.from(dayList); // Converts NodeList into an array.
-  dayList.forEach((days) => days.classList.remove("event-day"));
-  dayArray.splice(0, 7); // Cuts the weekday list items from this array.
+  dayArray.splice(0, 7); // Cuts the weekday list items from this array
+
   saveData.forEach((event) => {
     let foundDayEl = dayArray.find(
       // Variable that checks for events with the same day and month as what's on screen
@@ -173,7 +176,7 @@ const selectDay = (e) => {
         <ul id="details-desc"><strong>Description:</strong> ${userDay[i].description}</ul>
         <ul id="details-time"><strong>Time:</strong> ${userDay[i].time}</ul>
         <button type="button" onclick="editEvent('${userDay[i].id}')" id="edit-btn" class="details-btn" name="edit-btn">Edit</button>
-        <button type="button" id="delete-btn" class="details-btn" name="delete-btn">Delete</button>`;
+        <button type="button" id="delete-btn" onclick="deleteEvent('${userDay[i].id}')" class="details-btn" name="delete-btn">Delete</button>`;
       detailsPanel.innerHTML += HTMLText;
     }
   }
@@ -195,11 +198,15 @@ const editEvent = (buttonId) => {
 };
 
 const deleteEvent = (buttonId) => {
-  let dataArrIndex = saveData.findIndex((events) => events.id == buttonId);
+  const userDayList = document.querySelector(".active");
+  let dataArrIndex = saveData.findIndex(
+    (events) => events.id == JSON.stringify(buttonId)
+  );
 
-  buttonId.parentElement.remove();
   saveData.splice(dataArrIndex, 1);
   localStorage.setItem("saves", JSON.stringify(saveData));
+  userDayList.classList.remove("active"); // Deselect deleted event
+  detailsPanel.innerHTML = "";
   updateCalendar();
 };
 
