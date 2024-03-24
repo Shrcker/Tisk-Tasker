@@ -53,6 +53,7 @@ const updateCalendar = () => {
   // Highlights days that have events tied to them.
   let dayList = document.querySelectorAll("li:not(.inactive)"); // function will not highlight days not of the current month
   let dayArray = Array.from(dayList); // Converts NodeList into an array.
+  dayList.forEach((days) => days.classList.remove("event-day"));
   dayArray.splice(0, 7); // Cuts the weekday list items from this array.
   saveData.forEach((event) => {
     let foundDayEl = dayArray.find(
