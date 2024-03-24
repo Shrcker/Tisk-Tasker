@@ -7,7 +7,11 @@ const descText = document.getElementById("desc-text");
 const calendarBody = document.getElementById("calendar-body");
 const myModal = document.getElementById("myModal");
 const detailsPanel = document.getElementById("details-panel");
-const saveData = JSON.parse(localStorage.getItem("saves")) ?? [];
+const editBtn = document.getElementById("edit-btn");
+const deleteBtn = document.getElementById("delete-btn");
+const detailsHeader = document.getElementById("details-header");
+let saveData = JSON.parse(localStorage.getItem("saves")) || [];
+let currentEvent = {};
 let date = new Date();
 let year = date.getFullYear();
 let month = date.getMonth();
@@ -17,31 +21,47 @@ const prenexIcons = document.querySelectorAll(".calendar-navigation span");
 
 const saveDate = (e) => {
   e.preventDefault();
+  const dataArrIndex = saveData.findIndex(
+    (event) => event.id == currentEvent.id
+  );
 
   const userData = {
     title: titleText.value,
     description: descText.value,
     date: dayInput.value,
     time: eventTime.value,
+    id: Math.round(date.getTime() / 1000), // Generates a unique identifier for event
   };
   // Writes up the user object to store event details
 
-  const data = { ...userData };
-  saveData.push(data);
+  if (dataArrIndex === -1) {
+    saveData.unshift(userData);
+  } else {
+    saveData[dataArrIndex] = userData;
+  }
   localStorage.setItem("saves", JSON.stringify(saveData));
-  myModal.style.display = "none";
   updateCalendar(); // Once an event is saved, highlight it on the calendar
 };
 
 const updateCalendar = () => {
+  titleText.value = "";
+  dayInput.value = "";
+  descText.value = "";
+  myModal.style.display = "none";
+  currentEvent = {};
+
   // Highlights days that have events tied to them.
-  let dayList = document.querySelectorAll("li");
+  let dayList = document.querySelectorAll("li:not(.inactive)"); // function will not highlight days not of the current month
   let dayArray = Array.from(dayList); // Converts NodeList into an array.
   dayArray.splice(0, 7); // Cuts the weekday list items from this array.
   saveData.forEach((event) => {
-    const foundDayEl = dayArray.find(
+    let foundDayEl = dayArray.find(
+      // Variable that checks for events with the same day and month as what's on screen
       (day) =>
-        day.textContent === JSON.stringify(parseInt(event.date.split("-")[2]))
+        day.textContent ===
+          JSON.stringify(parseInt(event.date.split("-")[2])) &&
+        JSON.stringify(month + 1) ===
+          JSON.stringify(parseInt(event.date.split("-")[1]))
     );
     if (foundDayEl) {
       foundDayEl.classList.toggle("event-day");
@@ -127,6 +147,7 @@ prenexIcons.forEach((icon) => {
     // Call the manipulate function to
     // update the calendar display
     manipulate();
+    updateCalendar();
   });
 });
 
@@ -141,6 +162,7 @@ const selectDay = (e) => {
     (event) => JSON.stringify(parseInt(event.date.split("-")[2])) === targetDay
   ); // Finds and returns the object that matches the currently selected day.
   detailsPanel.innerHTML = "";
+
   if (userDay.length) {
     // If there are events matching the day, write their contents to the detail panel
     for (let i = 0; i < userDay.length; i++) {
@@ -148,10 +170,36 @@ const selectDay = (e) => {
         <h3 id="details-header">Here's what's going on today:</h3>
         <ul id="details-title"><strong>Event</strong>: ${userDay[i].title}</ul>
         <ul id="details-desc"><strong>Description:</strong> ${userDay[i].description}</ul>
-        <ul id="details-time"><strong>Time:</strong> ${userDay[i].time}</ul>`;
+        <ul id="details-time"><strong>Time:</strong> ${userDay[i].time}</ul>
+        <button type="button" onclick="editEvent('${userDay[i].id}')" id="edit-btn" class="details-btn" name="edit-btn">Edit</button>
+        <button type="button" id="delete-btn" class="details-btn" name="delete-btn">Delete</button>`;
       detailsPanel.innerHTML += HTMLText;
     }
   }
+};
+
+const editEvent = (buttonId) => {
+  let modalHeader = document.querySelector(".modal-content h2");
+  submitButton.innerText = "Update";
+  modalHeader.innerText = "What changes would you like to make?";
+
+  let dataArrIndex = saveData.findIndex((events) => events.id == buttonId);
+
+  currentEvent = saveData[dataArrIndex];
+  titleText.value = currentEvent.title;
+  descText.value = currentEvent.description;
+  dayInput.value = currentEvent.date;
+  eventTime.value = currentEvent.time;
+  myModal.style.display = "block";
+};
+
+const deleteEvent = (buttonId) => {
+  let dataArrIndex = saveData.findIndex((events) => events.id == buttonId);
+
+  buttonId.parentElement.remove();
+  saveData.splice(dataArrIndex, 1);
+  localStorage.setItem("saves", JSON.stringify(saveData));
+  updateCalendar();
 };
 
 day.addEventListener("click", selectDay);
