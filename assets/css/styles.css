@@ -1,8 +1,184 @@
+/* Resetting default browser styles */
 * {
 	margin: 0;
 	padding: 0;
 	font-family: 'Poppins', sans-serif;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+
+
+/* Button styles */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+/* Form styles */
+.form {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.form-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+
+.calendar-container {
+  background: #fff;
+  width: 450px;
+  border-radius: 10px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.calendar-container header {
+  display: flex;
+  align-items: center;
+  padding: 25px 30px 10px;
+  justify-content: space-between;
+}
+
+header .calendar-navigation {
+  display: flex;
+}
+
+header .calendar-navigation span {
+  height: 38px;
+  width: 38px;
+  margin: 0 1px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 38px;
+  border-radius: 50%;
+  user-select: none;
+  color: #aeabab;
+  font-size: 1.9rem;
+}
+
+.calendar-navigation span:last-child {
+  margin-right: -10px;
+}
+
+header .calendar-navigation span:hover {
+  background: #f2f2f2;
+}
+
+header .calendar-current-date {
+  font-weight: 500;
+  font-size: 1.45rem;
+}
+
+.calendar-body {
+  padding: 20px;
+}
+
+.calendar-body ul {
+  list-style: none;
+  flex-wrap: wrap;
+  display: flex;
+  text-align: center;
+}
+
+.calendar-body .calendar-dates {
+  margin-bottom: 20px;
+}
+
+.calendar-body li {
+  width: calc(100% / 7);
+  font-size: 1.07rem;
+  color: #414141;
+}
+
+.calendar-body .calendar-weekdays li {
+  cursor: default;
+  font-weight: 500;
+}
+
+.calendar-body .calendar-dates li {
+  margin-top: 30px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.calendar-dates li.inactive {
+  color: #aaa;
+}
+
+.calendar-dates li.active {
+  color: #fff;
+}
+
+.calendar-dates li::before {
+  position: absolute;
+  content: "";
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.calendar-dates li.active::before {
+  background: #6332c5;
+}
+
+active {
+  background: #6332c5;
+}
+
+.calendar-dates li:not(.active):hover::before {
+  background: #e4e1e1;
+}
+
 body {
 	display: flex;
 	background: aquamarine;
@@ -97,4 +273,179 @@ header .calendar-current-date {
 }
 .calendar-dates li:not(.active):hover::before {
 	background: #E4E1E1;
+}
+
+
+/* Container styles */
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+
+  background-color: #f9f9f9;
+
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Reminder styles */
+.reminders {
+  margin-top: 20px;
+}
+
+.reminder {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.reminder h3 {
+  margin-top: 0;
+  font-size: 1.2em;
+}
+
+.reminder p {
+  margin: 5px 0;
+}
+
+/* Button styles */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+/* Form styles */
+.form {
+  margin-top: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.form-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-button:hover {
+  background-color: #0056b3;
+}
+/* CSS for event modal */
+/* Planner styles */
+.planner {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 5px solid #6c6b6b;
+  color:#464444;
+  width: 80%;
+}
+
+.close {
+  color: #464444;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.calendar-dates li.event-day::before {
+  background: limegreen;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: red;
+  border-radius: 10px;
 }
