@@ -11,7 +11,14 @@ body {
   font-family: Arial, sans-serif;
 }
 
-
+header {
+  position: fixed;
+  top: 20px;
+  width: 100%;
+  font-size: 36px;
+  text-align: center;
+  padding: 20px;
+}
 
 /* Button styles */
 .button {
