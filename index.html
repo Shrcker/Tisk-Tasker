@@ -21,23 +21,6 @@
 
     <div class="main-content">
 
-      <div class="left-side">
-        <h2></h2>
-        <label for="user-input">Enter Task/Event:</label>
-        <input type="text" id="title-text" /><br />
-
-        <label for="user-input">Description:</label>
-        <input type="text" id="desc-text" /><br />
-
-        <label for="day-picker">Select Date:</label>
-        <input id="day-picker" type="date" /><br />
-
-          <label for="submit-button"></label>
-          <button type="button" id="submit-button">Save</button>
-        </div>
-    
-      </div>
-
     <div class="right-side">
       <div class="calendar-container">
         <header class="calendar-header">
@@ -75,13 +58,15 @@
             <span class="close">&times;</span>
             <h2>Add Event</h2>
             <form id="eventForm">
-                <label for="eventName">Event Name:</label>
-                <input type="text" id="eventName" name="eventName" required>
-                <label for="eventDate">Event Date:</label>
-                <input type="date" id="eventDate" name="eventDate" required>
-                <label for="eventTime">Event Time:</label>
-                <input type="time" id="eventTime" name="eventTime" required>
-                <button type="submit">Add</button>
+                <label for="title-text">Event Name: </label>
+                <input type="text" id="title-text" name="title-text" required><br>
+                <label for="desc-text">Description: </label>
+                <input type="text" name="desc-text" id="desc-text"><br>
+                <label for="day-picker">Event Date: </label>
+                <input type="date" id="day-picker" name="day-picker" required><br>
+                <label for="event-time">Event Time: </label>
+                <input type="time" id="event-time" name="event-time" required><br>
+                <button type="submit" id="submit-button">Add</button>
             </form>
         </div>
     </div>
