@@ -1,6 +1,6 @@
-# Project-1
+# Tisk Tasker
 
-##Description:
+## Description:
 
 This application offers a simple calendar to add events and check the date. It was created utilizing HTML, CSS, JavaScript, and respective APIs. 
 
@@ -10,15 +10,15 @@ What problem does this applcation solve: This application enables you to check t
 
 Why we built it: The reason for creating this project was to put our skills to the test and to learn how vital it is to collaborate with other developers when working on a large project.
 
-##Installation:
+## Installation:
 
 No extra installation steps required.
 
-##Usage:
+## Usage:
 
 In order to utilize this application, simply click on the deployed github pages or the link down below.
 
-##Credits:
+## Credits:
 
 [News API](https://newsapi.org/?ref=apilist.fun)
 
@@ -26,7 +26,7 @@ In order to utilize this application, simply click on the deployed github pages 
 
 [Source code for calendar layout](https://csshint.com/javascript-calendar/)
 
-##Collaborators:
+## Collaborators:
 
 [Tania](https://github.com/Shrcker)
 
@@ -36,11 +36,11 @@ In order to utilize this application, simply click on the deployed github pages 
 
 [Jamie](https://github.com/JamieThompson101)
 
-##Screenshot:
+## Screenshot:
 
 ![tisktasker](https://github.com/Shrcker/Tisk-Tasker/assets/130515437/3d8f33ea-832f-44cd-9cc8-b9fd52e22442)
 
-##Features:
+## Features:
 
 Interactive calendar in which you can add events to.
 
@@ -51,4 +51,4 @@ Daily trivia via the Numbers API we implemented.
 Simple CSS for your viewing pleasure.
 
 
-##Link to deployed website:
+## Link to deployed website:
