@@ -87,7 +87,7 @@ prenexIcons.forEach(icon => {
 		manipulate();
 	});
 });
-=======
+
 const taskText = document.getElementById("task-text");
 const descText = document.getElementById("desc-text");
 const monthInput = document.getElementById("month-input");

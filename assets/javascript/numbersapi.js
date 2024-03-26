@@ -1,4 +1,4 @@
-const numberUrl = "http://numbersapi.com/1337/trivia?notfound=floor&fragment";
+const numberUrl = "https://numbersapi.com/1337/trivia?notfound=floor&fragment";
 
 const number = document.getElementById("number");
 
