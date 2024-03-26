@@ -2,9 +2,7 @@
 
 ##Description:
 
-This application offers a simple calendar to add events and check the date. It was created utilizing HTML, CSS, JavaScript, and respective APIs. //add a bit more of a description once the application is finished
-
-Motivators:
+This application offers a simple calendar to add events and check the date. It was created utilizing HTML, CSS, JavaScript, and respective APIs. 
 
 What we learned: Through the process of working on and creating this applcation, we were able to hone our JavaScript, CSS, and HTML skills. In addition to this, as we collaborated with each other, we learned the importance of communicating with each other. Thus, we believe that as we've worked and finished this project, we have all become better developers.
 
@@ -26,6 +24,8 @@ In order to utilize this application, simply click on the deployed github pages 
 
 [Numbers API](http://numbersapi.com/#42)
 
+[Source code for calendar layout](https://csshint.com/javascript-calendar/)
+
 ##Collaborators:
 
 [Tania](https://github.com/Shrcker)
@@ -38,6 +38,7 @@ In order to utilize this application, simply click on the deployed github pages 
 
 ##Screenshot:
 
+![tisktasker](https://github.com/Shrcker/Tisk-Tasker/assets/130515437/3d8f33ea-832f-44cd-9cc8-b9fd52e22442)
 
 ##Features:
 
