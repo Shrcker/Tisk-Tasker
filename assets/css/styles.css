@@ -193,6 +193,7 @@ body {
 	padding: 0 10px;
 	align-items: center;
 	justify-content: center;
+  font-size: 48px;
 }
 .calendar-container {
 	background: #fff;
@@ -209,28 +210,7 @@ body {
 header .calendar-navigation {
 	display: flex;
 }
-header .calendar-navigation span {
-	height: 38px;
-	width: 38px;
-	margin: 0 1px;
-	cursor: pointer;
-	text-align: center;
-	line-height: 38px;
-	border-radius: 50%;
-	user-select: none;
-	color: #AEABAB;
-	font-size: 1.9rem;
-}
-.calendar-navigation span:last-child {
-	margin-right: -10px;
-}
-header .calendar-navigation span:hover {
-	background: #F2F2F2;
-}
-header .calendar-current-date {
-	font-weight: 500;
-	font-size: 1.45rem;
-}
+
 .calendar-body {
 	padding: 20px;
 }
